@@ -8,6 +8,7 @@ import org.mehtor.entity.Team;
 import org.mehtor.repository.ICrud;
 import org.mehtor.repository.PlayerRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class PlayerService extends ServiceManager<Player, Long> {
@@ -54,7 +55,10 @@ public class PlayerService extends ServiceManager<Player, Long> {
 		}
 		return Optional.of(responseDto);
 	}
-
+	
+	public List<Player> findPlayerByTeamID(Long teamID) {
+		return playerRepository.findPlayerByTeamId(teamID);
+	}
 
 //	public Optional<PlayerResponseDto> save(PlayerSaveRequestDto dto){
 //		Player player = new Player();

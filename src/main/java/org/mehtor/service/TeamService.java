@@ -9,6 +9,7 @@ import org.mehtor.repository.LeagueRepository;
 import org.mehtor.repository.StadiumRepository;
 import org.mehtor.repository.TeamRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class TeamService extends ServiceManager<Team,Long> {
@@ -57,5 +58,15 @@ public class TeamService extends ServiceManager<Team,Long> {
 			System.out.println("Service: Team kaydedilirken hata oluştu."+ e.getMessage());
 		}
 		return Optional.of(teamResponseDto);
+	}
+	
+	public List<Team> listAllByNameContainsValue(String value){
+		try {
+			return teamRepository.listAllByNameContainsValue(value);
+		}
+		catch (Exception e) {
+			System.out.println("Service : listAllByNameContainsValue metodunda hata oluştu" + e.getMessage());
+			return null;
+		}
 	}
 }

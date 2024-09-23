@@ -84,5 +84,14 @@ public class TeamController {
 		return teamList;
 	}
 	
+	public List<Team> listAllByNameContainsValue(String value){
+		try {
+			return teamService.listAllByNameContainsValue(value);
+		}
+		catch (Exception e) {
+			System.out.println("Controller : listAllByNameContainsValue metodunda hata oluştu" + e.getMessage());
+			return null;
+		}
+	}
 	
 }

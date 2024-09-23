@@ -11,8 +11,8 @@ import java.util.Optional;
 public class MatchController {
 	private final MatchService matchService;
 	
-	public MatchController(MatchService matchService) {
-		this.matchService = matchService;
+	public MatchController() {
+		this.matchService = new MatchService();
 	}
 	
 	public Match save(Match match) {

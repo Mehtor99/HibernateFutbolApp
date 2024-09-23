@@ -9,8 +9,8 @@ import java.util.Optional;
 public class StatisticsController {
 	private final StatisticsService statisticsService;
 	
-	public StatisticsController(StatisticsService statisticsService) {
-		this.statisticsService = statisticsService;
+	public StatisticsController() {
+		this.statisticsService = new StatisticsService();
 	}
 	
 	public Statistics save(Statistics statistics) {
