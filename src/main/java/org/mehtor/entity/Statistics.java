@@ -1,12 +1,10 @@
 package org.mehtor.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -17,32 +15,52 @@ public class Statistics extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Integer wins;
-	private Integer losses;
-	private Integer draws;
-	@Column(name="goalsscored")
-	private Integer goalsScored;
-	@Column(name="goalsconceded")
-	private Integer goalsConceded;
+	@Column(name = "team_id")
+	private Long teamId;
+	@Column(name = "league_id")
+	private Long leagueId;
+	private Integer wins = 0;
+	private Integer losses = 0;
+	private Integer draws = 0;
+	@Column(name = "goalsscored")
+	private Integer goalsScored = 0;
+	@Column(name = "goalsconceded")
+	private Integer goalsConceded = 0;
+	
+	public void addWin() {
+		if (this.wins == null) {
+			this.wins = 0;
+		}
+		this.wins++;
+	}
 	
 	
 	public int getGoalDifference() {
 		return goalsScored - goalsConceded;
 	}
 	
-	public void addWin() {
-		this.wins++;
-	}
 	
 	public void addDraw() {
+		if (this.draws == null) {
+			this.draws = 0;
+		}
 		this.draws++;
 	}
 	
-	public void addLoss() {
+	public void addLose() {
+		if (this.losses == null) {
+			this.losses = 0;
+		}
 		this.losses++;
 	}
 	
 	public void addGoals(int scored, int conceded) {
+		if (this.goalsScored == null) {
+			this.goalsScored = 0;
+		}
+		if (this.goalsConceded == null) {
+			this.goalsConceded = 0;
+		}
 		this.goalsScored += scored;
 		this.goalsConceded += conceded;
 	}

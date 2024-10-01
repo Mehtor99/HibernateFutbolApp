@@ -19,9 +19,6 @@ public class LeagueService extends ServiceManager<League ,Long> {
 		this.leagueRepository = leagueRepository;
 	}
 	
-	public Optional<League> findLeagueIdByName(String leagueName) {   /// gerekli olmayabilir
-		return leagueRepository.findLeagueIdByName(leagueName);
-	}
 	
 	public Optional<LeagueResponseDto> save(LeagueSaveRequestDto dto){
 		League league = new League();

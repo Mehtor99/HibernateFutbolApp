@@ -54,4 +54,17 @@ public class ManagerService extends ServiceManager<Manager,Long> {
 		return Optional.of(managerResponseDto);
 	}
 	
+	
+	public Optional<Manager> findManagerByIdAndPassword(Long id, String password) {
+		return managerRepository.findManagerByIdAndPassword(id, password);
+	}
+	
+	public Optional<Long> findTeamIdByManagerId(Long managerId) {
+		return managerRepository.findTeamIdByManagerId(managerId);
+	}
+	
+	public Optional<Manager> findByTeamId(Long secilenTakimID) {
+		return managerRepository.findByTeamId(secilenTakimID);
+	}
+	
 }

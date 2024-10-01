@@ -20,9 +20,5 @@ public class MatchService extends ServiceManager<Match,Long> {
 		super(matchRepository);
 		this.matchRepository = matchRepository;
 	}
-	
-//	public Optional<MatchResponseDto> save(MatchSaveRequestDto dto){
-//
-//	}
 
 }

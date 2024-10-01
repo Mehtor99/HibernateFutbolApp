@@ -27,7 +27,6 @@ public class MainGui {
 		System.out.println("1- Menajer Islemleri");
 		System.out.println("2- Takim Islemleri");
 		System.out.println("3- Musabaka Islemleri");
-		System.out.println("4- ");
 		System.out.println("0- Cikis");
 		System.out.println("Secimiz: ");
 		int opt = scanner.nextInt();
@@ -37,19 +36,16 @@ public class MainGui {
 
 	private static int futbolAppMenuOpsiyonlari(int opt) {
 		switch (opt) {
-//			case 1: {
-//				MenajerModule.menajerModule(databaseModel);
-//				break;
-//			}
+			case 1: {
+				ManagerGui.menajerModule(controllerModel);
+				break;
+			}
 			case 2: {
 				TeamGui.teamGui(controllerModel);
 				break;
 			}
-//			case 3:{
-//				MusabakaModule.musabakaModule(databaseModel);
-//			}
-			case 4:{
-
+			case 3:{
+				MatchGui.matchModule(controllerModel);
 				break;
 			}
 			case 0: {

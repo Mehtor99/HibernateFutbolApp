@@ -1,10 +1,8 @@
 package org.mehtor.controller;
 
-import org.mehtor.entity.League;
-import org.mehtor.entity.Match;
-import org.mehtor.service.LeagueService;
-import org.mehtor.service.MatchService;
 
+import org.mehtor.entity.Match;
+import org.mehtor.service.MatchService;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,5 +84,4 @@ public class MatchController {
 		}
 		return userList;
 	}
-	
 }

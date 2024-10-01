@@ -19,13 +19,14 @@ public class TeamService extends ServiceManager<Team,Long> {
 	public TeamService() {
 		this(new TeamRepository());
 	}
+	
 	public TeamService(TeamRepository teamRepository) {
 		super(teamRepository);
 		this.teamRepository = teamRepository;
 		this.stadiumService = new StadiumService();
 	}
 	
-	public Optional<Team> findTeamIdByName(String teamName) {
+	public Optional<Team> findTeamIdByName(String teamName){
 		return teamRepository.findTeamIdByName(teamName);
 	}
 	
@@ -60,13 +61,12 @@ public class TeamService extends ServiceManager<Team,Long> {
 		return Optional.of(teamResponseDto);
 	}
 	
-	public List<Team> listAllByNameContainsValue(String value){
-		try {
-			return teamRepository.listAllByNameContainsValue(value);
-		}
-		catch (Exception e) {
-			System.out.println("Service : listAllByNameContainsValue metodunda hata oluştu" + e.getMessage());
-			return null;
-		}
+	public List<Team> ListAllByNameContainsValue(String value){
+		return teamRepository.listAllByNameContainsValue(value);
 	}
+	
+	public List<Team> getAllTeams(){
+		return teamRepository.findAll();
+	}
+	
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.mehtor.entity.BaseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,49 +147,29 @@ public class RepositoryManager<T, ID> implements ICrud<T, ID> {
 		}
 	}
 	
+	public Optional<T> update(T entity){
+		EntityManager em = getEntityManager();
+		EntityTransaction tx = null;
+		Optional<T> entityToUpdate = Optional.empty();
+		
+		try {
+			tx = em.getTransaction();
+			tx.begin();
+			setBaseEntityFields(entity, false);
+			entityToUpdate = Optional.of(em.merge(entity));
+			
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return entityToUpdate;
+	}
+	
 	
 	
 }
-
-//	@Override
-//	public List<T> findByFieldNameAndValue(String fieldName, Object value) {
-//		EntityManager em = getEntityManager();
-//		try {
-//			CriteriaBuilder cb = em.getCriteriaBuilder();
-//			CriteriaQuery<T> cq = cb.createQuery(entityClass);
-//			Root<T> root = cq.from(entityClass);
-//			cq.select(root).where(cb.equal(root.get(fieldName), value));
-//			return em.createQuery(cq).getResultList();
-//		}
-//		finally {
-//			em.close();
-//		}
-//	}
-//
-//	@Override
-//	public List<T> findByFilledFields(T entity) {
-//		EntityManager em = getEntityManager();
-//		try {
-//			CriteriaBuilder cb = em.getCriteriaBuilder();
-//			CriteriaQuery<T> cq = cb.createQuery(entityClass);
-//			Root<T> root = cq.from(entityClass);
-//			List<Predicate> predicates = new ArrayList<>();
-//			for (Field field : entity.getClass().getDeclaredFields()) {
-//				field.setAccessible(true);
-//				try {
-//					Object value = field.get(entity);
-//					if (value != null) {
-//						predicates.add(cb.equal(root.get(field.getName()), value));
-//					}
-//				}
-//				catch (Exception e) {
-//					System.out.println("findByFilledFields metodunda hata meydana geldi..." + e.getMessage());
-//				}
-//			}
-//			cq.where(predicates.toArray(new Predicate[0]));
-//			return em.createQuery(cq).getResultList();
-//		}
-//		finally {
-//			em.close();
-//		}
-//	}

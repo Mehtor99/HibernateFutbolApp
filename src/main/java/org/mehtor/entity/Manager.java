@@ -1,14 +1,11 @@
 package org.mehtor.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
-
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor   //Boş constructor oluşturur.
 @AllArgsConstructor  //Full constructor oluştutur
 @SuperBuilder
@@ -19,16 +16,17 @@ public class Manager extends BaseEntity  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name= "team_id")
+	@Column(name="team_id")
 	private Long teamID;
-	@Column(name = "managername")
+	@Column(name="managername")
 	private String managerName;
-	@Column(name = "managersurname")
+	@Column(name="managersurname")
 	private String managerSurname;
-	@Column(name = "managerpassword")
+	@Column(name="managerpassword")
 	private String managerPassword;
-	@Column(name = "dateofbirth")
-	@Temporal(TemporalType.DATE)
+	@Column(name="dateofbirth")
 	private LocalDate dateOfBirth;
+	@Column(name="username")
+	private String userName;
 	
 }

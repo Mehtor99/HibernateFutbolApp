@@ -1,19 +1,18 @@
 package org.mehtor.dto.response;
 
+import lombok.Getter;
 import org.mehtor.enums.EPosition;
 
 import java.time.LocalDate;
 
 public class PlayerResponseDto {
 	
+	
 	private String name;
 	private String surname;
 	private LocalDate birthday;
 	private EPosition position;
-	
-	public String getName() {
-		return name;
-	}
+	private Long contractFee;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -43,8 +42,20 @@ public class PlayerResponseDto {
 		this.position = position;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public Long getContractFee() {
+		return contractFee;
+	}
+	
+	public void setContractFee(Long contractFee) {
+		this.contractFee = contractFee;
+	}
+	
 	@Override
 	public String toString() {
-		return "PlayerResponseDto{" + "name='" + getName() + '\'' + ", surname='" + getSurname() + '\'' + ", birthday=" + getBirthday() + ", position=" + getPosition() + '}';
+		return "PlayerResponseDto{" + "name='" + getName() + '\'' + ", surname='" + getSurname() + '\'' + ", birthday=" + getBirthday() + ", position=" + getPosition() + ", contractFee=" + getContractFee() + '}';
 	}
 }

@@ -1,22 +1,20 @@
 package org.mehtor.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
-
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 @Data
 @Entity
 @Table(name = "tblmatch")
-public class Match extends BaseEntity  {
+public class Match extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -37,8 +35,14 @@ public class Match extends BaseEntity  {
 	@Temporal(TemporalType.DATE)
 	@Column(name="matchdate")
 	private LocalDate matchDate;
-	@ElementCollection
-	@Column(name="teamidtoname")
-	private Map<Integer, String> teamIDtoName;
+	@Column(name="fixture_id")
+	private Long fixtureID;
 	
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		return "Maç ID: " + id + ", " +
+				"Ev Sahibi Takım: " + homeTeamID + ", " +
+				"Deplasman Takımı: " + awayTeamID + ", " +
+				"Tarih: " + matchDate.format(formatter);
+	}
 }

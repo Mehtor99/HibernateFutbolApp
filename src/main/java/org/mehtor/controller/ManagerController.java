@@ -91,4 +91,16 @@ public class ManagerController  {
 		return userList;
 	}
 	
+	public Optional<Manager> findManagerByIdAndPassword(Long id, String password) {
+		return managerService.findManagerByIdAndPassword(id, password);
+	}
+	
+	public Optional<Long> findTeamIdByManagerId(Long managerId) {
+		return managerService.findTeamIdByManagerId(managerId);
+	}
+	
+	public Optional<Manager> findByTeamId(Long secilenTakimID) {
+		return managerService.findByTeamId(secilenTakimID);
+	}
+	
 }

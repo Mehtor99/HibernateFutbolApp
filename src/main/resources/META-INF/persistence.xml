@@ -13,6 +13,8 @@
         <class>org.mehtor.entity.Stadium</class>
         <class>org.mehtor.entity.Statistics</class>
         <class>org.mehtor.entity.Team</class>
+        <class>org.mehtor.entity.Fixture</class>
+        <class>org.mehtor.entity.TransferOffer</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver"
@@ -28,10 +30,10 @@
                       value="root" />
 
             <property name="hibernate.show_sql"
-                      value="true" />
+                      value="false" />
 
             <property name="hibernate.format_sql"
-                      value="true" />
+                      value="false" />
 
             <property name="hibernate.use_sql_comments"
                       value="false"/>

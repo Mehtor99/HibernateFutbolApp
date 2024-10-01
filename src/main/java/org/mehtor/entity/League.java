@@ -1,17 +1,14 @@
 package org.mehtor.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.mehtor.enums.ECluster;
 import org.mehtor.enums.ERegion;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
@@ -31,7 +28,10 @@ public class League extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private ERegion region;
 	@Temporal(TemporalType.DATE)
+	@Column(name="startdate")
 	private LocalDate startDate;
 	@ElementCollection
+	@Column(name="teamidlist")
 	private List<Long> teamIDList;
+	
 }

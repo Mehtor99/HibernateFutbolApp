@@ -1,14 +1,12 @@
 package org.mehtor.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@NoArgsConstructor   //Boş constructor oluşturur.
-@AllArgsConstructor  //Full constructor oluştutur
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
 @Data
 @Entity
@@ -17,10 +15,9 @@ public class Stadium extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "stadiumname")
+	@Column(name="stadiumname")
 	private String stadiumName;
 	private String location;
 	private Integer capacity;
-	
 	
 }

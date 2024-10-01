@@ -15,7 +15,6 @@ public class PlayerService extends ServiceManager<Player, Long> {
 	private final PlayerRepository playerRepository;
 	private final TeamService teamService;
 	
-	
 	public PlayerService() {
 		this(new PlayerRepository());
 	}
@@ -26,43 +25,46 @@ public class PlayerService extends ServiceManager<Player, Long> {
 		this.teamService = new TeamService();
 	}
 	
+	
 	public Optional<PlayerResponseDto> save(PlayerSaveRequestDto dto) {
 		Player player;
 		Optional<Player> playerOptional;
-		PlayerResponseDto responseDto = new PlayerResponseDto();
+		PlayerResponseDto responseDto=new PlayerResponseDto();
 		
-		try {
-			Optional<Team> teamOptional = teamService.findTeamIdByName(dto.getTeamName());
-			if (teamOptional.isPresent()) {
-				player = new Player();
+		try{
+			Optional<Team> teamOptional= teamService.findTeamIdByName(dto.getTeamName());
+			if(teamOptional.isPresent()){
+				player=new Player();
 				player.setName(dto.getName());
 				player.setSurname(dto.getSurname());
 				player.setBirthday(dto.getBirthday());
 				player.setPosition(dto.getPosition());
 				player.setTeamID(teamOptional.get().getId());
-				playerOptional = Optional.of(playerRepository.save(player));
+				playerOptional=Optional.of(playerRepository.save(player));
+				
 				
 				responseDto.setName(playerOptional.get().getName());
 				responseDto.setSurname(playerOptional.get().getSurname());
 				responseDto.setBirthday(playerOptional.get().getBirthday());
 				responseDto.setPosition(playerOptional.get().getPosition());
-				System.out.println(playerOptional.get().getName() + " başarıyla kaydedildi");
+				System.out.println(playerOptional.get().getName()+" başarıyla kaydedildi");
 				return Optional.of(responseDto);
 			}
 		}
-		catch (Exception e) {
-			System.out.println("Service : Player kaydedilirken hata oluştur " + e.getMessage());
+		catch(Exception e){
+			System.out.println("Player kaydedilirken hata oluştur "+e.getMessage());
 		}
 		return Optional.of(responseDto);
 	}
 	
-	public List<Player> findPlayerByTeamID(Long teamID) {
-		return playerRepository.findPlayerByTeamId(teamID);
+	public List<Player> findPlayerByTeamID(Long teamID){
+		try {
+			return playerRepository.findPlayerByTeamId(teamID);
+		}
+		catch (Exception e) {
+			System.out.println("Service: ListAllByNameContainsValue hata oluştu: "+e.getMessage());
+		}
+		return null;
 	}
-
-//	public Optional<PlayerResponseDto> save(PlayerSaveRequestDto dto){
-//		Player player = new Player();
-//		PlayerResponseDto responseDto = new PlayerResponseDto();
-//		//tamamlancak
-//	}
+	
 }
